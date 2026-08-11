@@ -1771,13 +1771,15 @@ export function KineticChoreography({
           const stageDepth = stage.position.z + runtime.root.position.z;
           const previousLayer = Number(stage.userData.compositeLayer ?? 0);
           const nextLayer =
-            previousLayer === 1
-              ? stageDepth < -1.92
-                ? 0
-                : 1
-              : stageDepth > -1.62
-                ? 1
-                : 0;
+            runtime.index === 0
+              ? 0
+              : previousLayer === 1
+                ? stageDepth < -1.92
+                  ? 0
+                  : 1
+                : stageDepth > -1.62
+                  ? 1
+                  : 0;
 
           if (nextLayer !== previousLayer) {
             stage.traverse((object) => object.layers.set(nextLayer));

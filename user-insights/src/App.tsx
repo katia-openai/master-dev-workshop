@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { AudienceMomentum } from "@/components/audience-momentum";
 import { AudienceChart } from "@/components/audience-chart";
 import { GeographicTable } from "@/components/geographic-table";
 import { GlobeSection } from "@/components/globe-section";
@@ -9,7 +10,13 @@ import { cities, getCities, type Period, type Region } from "@/data/insights";
 export default function App() {
   const [region, setRegion] = useState<Region>("Everywhere");
   const [period, setPeriod] = useState<Period>("28d");
+  const [selectedCountry, setSelectedCountry] = useState<string | null>(null);
   const selectedCities = useMemo(() => getCities(region), [region]);
+
+  const handleRegionChange = (nextRegion: Region) => {
+    setRegion(nextRegion);
+    setSelectedCountry(null);
+  };
 
   return (
     <div className="app-shell" id="overview">
@@ -30,7 +37,8 @@ export default function App() {
             <GlobeSection
               cities={selectedCities}
               region={region}
-              onRegionChange={setRegion}
+              selectedCountry={selectedCountry}
+              onRegionChange={handleRegionChange}
             />
             <div className="analytics-grid">
               <AudienceChart
@@ -39,13 +47,19 @@ export default function App() {
                 onPeriodChange={setPeriod}
               />
               <GeographicTable cities={selectedCities} />
+              <AudienceMomentum
+                cities={selectedCities}
+                period={period}
+                selectedCountry={selectedCountry}
+                onCountrySelect={setSelectedCountry}
+              />
             </div>
           </div>
           <InsightsRail
             cities={selectedCities}
             allCities={cities}
             region={region}
-            onRegionChange={setRegion}
+            onRegionChange={handleRegionChange}
           />
         </div>
         <footer className="dashboard-footer">

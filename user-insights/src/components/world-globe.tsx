@@ -4,7 +4,13 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import type { UserCity } from "@/data/insights";
 
-export function WorldGlobe({ cities }: { cities: UserCity[] }) {
+export function WorldGlobe({
+  cities,
+  selectedCountry,
+}: {
+  cities: UserCity[];
+  selectedCountry: string | null;
+}) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const frameRef = useRef<HTMLDivElement>(null);
   const pointerRef = useRef<number | null>(null);
@@ -17,14 +23,21 @@ export function WorldGlobe({ cities }: { cities: UserCity[] }) {
     () =>
       cities.map((city, index) => ({
         location: [city.lat, city.lng] as [number, number],
-        size: Math.max(0.036, Math.min(0.082, 0.034 + city.active / 46000)),
-        color: (index % 4 === 0
-          ? [0.53, 0.96, 0.78]
-          : index % 5 === 0
-            ? [0.47, 0.68, 1]
-            : [0.72, 0.57, 1]) as [number, number, number],
+        size:
+          selectedCountry === city.country
+            ? 0.115
+            : Math.max(0.036, Math.min(0.082, 0.034 + city.active / 46000)),
+        color: (selectedCountry
+          ? selectedCountry === city.country
+            ? [0.53, 0.96, 0.78]
+            : [0.42, 0.36, 0.6]
+          : index % 4 === 0
+            ? [0.53, 0.96, 0.78]
+            : index % 5 === 0
+              ? [0.47, 0.68, 1]
+              : [0.72, 0.57, 1]) as [number, number, number],
       })),
-    [cities],
+    [cities, selectedCountry],
   );
 
   useEffect(() => {
@@ -100,7 +113,7 @@ export function WorldGlobe({ cities }: { cities: UserCity[] }) {
   return (
     <div
       className="globe-orbit"
-      aria-label={`Interactive Earth displaying ${cities.length} worldwide user locations`}
+      aria-label={`Interactive Earth displaying ${cities.length} worldwide user locations${selectedCountry ? ` and highlighting ${selectedCountry}` : ""}`}
     >
       <div ref={frameRef} className="globe-frame">
         <canvas

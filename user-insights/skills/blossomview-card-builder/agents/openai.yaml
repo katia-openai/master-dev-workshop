@@ -1,0 +1,4 @@
+interface:
+  display_name: "BlossomView Card Builder"
+  short_description: "Build cards using the real BlossomView UI system"
+  default_prompt: "Use $blossomview-card-builder to add a dashboard card that matches the existing BlossomView components, data, and responsive layout."

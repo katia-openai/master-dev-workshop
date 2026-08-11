@@ -1,0 +1,1267 @@
+@import "tailwindcss";
+
+@property --season-accent {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #f4a6bc;
+}
+
+@property --season-glow {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #bd698b;
+}
+
+@property --scene-atmosphere {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #17101d;
+}
+
+:root {
+  font-family: "DM Sans", "Helvetica Neue", sans-serif;
+  color: #f7f2ee;
+  background: #07060a;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  --season-accent: #f4a6bc;
+  --season-glow: #bd698b;
+  --scene-atmosphere: #17101d;
+  --page-gutter: clamp(24px, 3.6vw, 58px);
+  --stepper-scene-clearance: clamp(120px, 17vh, 164px);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 320px;
+  min-height: 100%;
+  scroll-behavior: smooth;
+  scrollbar-color: color-mix(in srgb, var(--season-accent) 40%, transparent)
+    #08090d;
+  scrollbar-width: thin;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  overflow-x: clip;
+  background: #07060a;
+}
+
+body,
+button,
+a {
+  font-family: "DM Sans", "Helvetica Neue", sans-serif;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 1px solid var(--season-accent);
+  outline-offset: 5px;
+}
+
+button {
+  font: inherit;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.day-journey,
+.journey {
+  min-width: 0;
+}
+
+.journey {
+  position: relative;
+  height: 2600svh;
+  min-height: 13000px;
+}
+
+.journey__sticky {
+  position: sticky;
+  top: 0;
+  isolation: isolate;
+  width: 100%;
+  height: 100svh;
+  min-height: 560px;
+  overflow: clip;
+  background:
+    radial-gradient(circle at 18% 9%, rgb(126 70 72 / 15%), transparent 34%),
+    var(--scene-atmosphere);
+  transition:
+    background-color 800ms ease,
+    --season-accent 800ms ease,
+    --season-glow 800ms ease,
+    --scene-atmosphere 800ms ease;
+}
+
+.scene-atmosphere {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.scene-atmosphere::before {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      circle at 23% 24%,
+      color-mix(in srgb, var(--season-accent) 27%, #ffc18d 9%),
+      transparent 23%
+    ),
+    radial-gradient(
+      ellipse at 72% 68%,
+      color-mix(in srgb, var(--season-glow) 22%, transparent),
+      transparent 42%
+    ),
+    radial-gradient(
+      ellipse at 8% -4%,
+      color-mix(in srgb, var(--season-accent) 16%, #f2a17b 4%),
+      transparent 40%
+    ),
+    linear-gradient(
+      154deg,
+      color-mix(in srgb, var(--scene-atmosphere) 91%, #351c20),
+      color-mix(in srgb, var(--scene-atmosphere) 56%, #020408) 66%,
+      color-mix(in srgb, var(--scene-atmosphere) 82%, #07101c)
+    );
+  content: "";
+}
+
+.scene-atmosphere::after {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(1px 1px at 8% 17%, rgb(255 255 255 / 38%), transparent),
+    radial-gradient(1px 1px at 19% 42%, rgb(255 255 255 / 28%), transparent),
+    radial-gradient(1px 1px at 31% 12%, rgb(255 255 255 / 34%), transparent),
+    radial-gradient(1px 1px at 43% 74%, rgb(255 255 255 / 23%), transparent),
+    radial-gradient(1px 1px at 57% 19%, rgb(255 255 255 / 31%), transparent),
+    radial-gradient(1px 1px at 69% 63%, rgb(255 255 255 / 28%), transparent),
+    radial-gradient(1px 1px at 82% 11%, rgb(255 255 255 / 36%), transparent),
+    radial-gradient(1px 1px at 94% 47%, rgb(255 255 255 / 24%), transparent);
+  content: "";
+  opacity: 0.55;
+}
+
+.scene-atmosphere__light {
+  position: absolute;
+  top: -58%;
+  left: -22%;
+  width: 86vw;
+  height: 142vh;
+  transform: rotate(-16deg);
+  background:
+    radial-gradient(
+      ellipse at 18% 42%,
+      color-mix(in srgb, var(--season-accent) 30%, #ffbd8e 18%),
+      transparent 33%
+    ),
+    linear-gradient(
+      104deg,
+      color-mix(in srgb, var(--season-accent) 14%, transparent),
+      transparent 62%
+    );
+  filter: blur(34px);
+  opacity: 0.72;
+}
+
+.scene-atmosphere__grain {
+  position: absolute;
+  inset: -50%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.38'/%3E%3C/svg%3E");
+  opacity: 0.035;
+  transform: rotate(6deg);
+  mix-blend-mode: soft-light;
+}
+
+.season-field {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.season-field span {
+  position: absolute;
+  top: -8%;
+  left: 50%;
+  display: block;
+  width: 9px;
+  height: 13px;
+  border-radius: 75% 25% 70% 30% / 62% 28% 72% 38%;
+  opacity: 0.46;
+  animation: season-fall 13s linear infinite;
+  will-change: transform;
+}
+
+.season-field span:nth-child(9n + 1) {
+  left: 4%;
+  animation-delay: -2s;
+  animation-duration: 15s;
+}
+
+.season-field span:nth-child(9n + 2) {
+  left: 17%;
+  width: 6px;
+  height: 9px;
+  animation-delay: -8s;
+  animation-duration: 12s;
+}
+
+.season-field span:nth-child(9n + 3) {
+  left: 29%;
+  animation-delay: -4s;
+  animation-duration: 17s;
+}
+
+.season-field span:nth-child(9n + 4) {
+  left: 42%;
+  width: 13px;
+  height: 17px;
+  animation-delay: -11s;
+  animation-duration: 16s;
+}
+
+.season-field span:nth-child(9n + 5) {
+  left: 57%;
+  animation-delay: -6s;
+  animation-duration: 14s;
+}
+
+.season-field span:nth-child(9n + 6) {
+  left: 69%;
+  width: 7px;
+  height: 10px;
+  animation-delay: -1s;
+  animation-duration: 18s;
+}
+
+.season-field span:nth-child(9n + 7) {
+  left: 81%;
+  animation-delay: -13s;
+  animation-duration: 15s;
+}
+
+.season-field span:nth-child(9n + 8) {
+  left: 91%;
+  width: 12px;
+  height: 16px;
+  animation-delay: -7s;
+  animation-duration: 17s;
+}
+
+.season-field span:nth-child(9n) {
+  left: 51%;
+  width: 5px;
+  height: 8px;
+  animation-delay: -15s;
+  animation-duration: 19s;
+}
+
+.season-field--tokyo span {
+  background:
+    radial-gradient(circle at 35% 25%, rgb(255 249 249 / 72%), transparent 26%),
+    rgb(234 139 174 / 65%);
+  box-shadow: 0 0 14px rgb(233 139 174 / 14%);
+}
+
+.season-field--cairo span {
+  width: 14px;
+  height: 14px;
+  border: 1px solid rgb(248 206 126 / 38%);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 34% 31%,
+    rgb(255 241 196 / 42%),
+    rgb(214 160 71 / 9%) 58%,
+    transparent 72%
+  );
+  box-shadow: 0 0 20px rgb(248 197 105 / 18%);
+  animation-name: season-rise;
+}
+
+.season-field--paris span {
+  width: 11px;
+  height: 18px;
+  border-radius: 84% 16% 77% 23% / 67% 29% 71% 33%;
+  background: linear-gradient(145deg, #d99a58, #763f2b 72%);
+  box-shadow: 0 0 11px rgb(219 145 75 / 13%);
+}
+
+.season-field--new-york span {
+  width: 5px;
+  height: 5px;
+  border: 1px solid rgb(239 246 255 / 62%);
+  border-radius: 1px;
+  background: rgb(222 235 255 / 36%);
+  box-shadow: 0 0 9px rgb(183 208 255 / 23%);
+}
+
+.season-field--new-york span:nth-child(3n) {
+  width: 9px;
+  height: 14px;
+  border: 0;
+  border-radius: 80% 20% 74% 26% / 66% 28% 72% 34%;
+  background: linear-gradient(145deg, #cb7c69, #683a43 74%);
+  box-shadow: 0 0 10px rgb(221 123 111 / 15%);
+}
+
+.season-field--ushuaia span {
+  width: 9px;
+  height: 9px;
+  border: 1px solid rgb(225 245 255 / 68%);
+  border-radius: 50% 0 50% 0;
+  background: rgb(215 239 255 / 52%);
+  box-shadow:
+    0 0 8px rgb(225 245 255 / 38%),
+    0 0 18px rgb(145 205 255 / 28%);
+  opacity: 0.72;
+  animation-duration: 8s;
+}
+
+.season-field--ushuaia span:nth-child(4n) {
+  width: 13px;
+  height: 13px;
+  filter: blur(0.5px);
+}
+
+.kinetic-scene__canvas {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    #000 0,
+    #000 calc(100% - var(--stepper-scene-clearance)),
+    transparent calc(100% - 92px)
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    #000 0,
+    #000 calc(100% - var(--stepper-scene-clearance)),
+    transparent calc(100% - 92px)
+  );
+  transition: opacity 520ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.kinetic-scene__canvas--ready {
+  opacity: 1;
+}
+
+.kinetic-scene__canvas--foreground {
+  z-index: 4;
+}
+
+.landmark-orbit {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  max-width: none;
+  object-fit: contain;
+  opacity: 0;
+  pointer-events: none;
+  transform-origin: center;
+  filter:
+    saturate(0.82)
+    contrast(1.04)
+    drop-shadow(0 18px 26px rgb(0 0 0 / 28%));
+  will-change: transform, opacity;
+}
+
+.kinetic-scene__fallback {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  width: min(66vw, 820px);
+  aspect-ratio: 2 / 1;
+  transform: translate(-50%, -50%) rotate(-8deg);
+  border: 1px solid color-mix(in srgb, var(--season-accent) 16%, transparent);
+  border-radius: 50%;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.foreground-depth {
+  position: absolute;
+  z-index: 5;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.foreground-depth span {
+  position: absolute;
+  display: block;
+  width: clamp(24px, 3.4vw, 54px);
+  height: clamp(34px, 5.4vw, 82px);
+  border-radius: 72% 28% 70% 30% / 68% 38% 62% 32%;
+  background:
+    radial-gradient(circle at 38% 24%, rgb(255 245 242 / 58%), transparent 26%),
+    color-mix(in srgb, var(--season-accent) 64%, transparent);
+  box-shadow:
+    inset -5px -7px 12px rgb(75 24 45 / 18%),
+    0 0 24px color-mix(in srgb, var(--season-accent) 10%, transparent);
+  filter: blur(1.8px);
+  opacity: 0.34;
+  animation: foreground-drift 11s ease-in-out infinite alternate;
+}
+
+.foreground-depth span:nth-child(1) {
+  top: 11%;
+  left: 2%;
+  transform: rotate(-36deg) scale(1.4);
+}
+
+.foreground-depth span:nth-child(2) {
+  top: 30%;
+  right: 2.8%;
+  transform: rotate(47deg) scale(0.88);
+  animation-delay: -3s;
+}
+
+.foreground-depth span:nth-child(3) {
+  right: 14%;
+  bottom: 7%;
+  transform: rotate(-21deg) scale(1.5);
+  filter: blur(3.6px);
+  animation-delay: -7s;
+}
+
+.foreground-depth span:nth-child(4) {
+  bottom: 3%;
+  left: 35%;
+  transform: rotate(68deg) scale(0.78);
+  animation-delay: -4s;
+}
+
+.foreground-depth span:nth-child(5) {
+  top: 4%;
+  left: 47%;
+  transform: rotate(-66deg) scale(0.62);
+  animation-delay: -8s;
+}
+
+.foreground-depth span:nth-child(6) {
+  top: 45%;
+  left: 13%;
+  transform: rotate(28deg) scale(0.46);
+  animation-delay: -2s;
+}
+
+.foreground-depth span:nth-child(7) {
+  top: 19%;
+  right: 26%;
+  transform: rotate(16deg) scale(0.52);
+  animation-delay: -5s;
+}
+
+.foreground-depth--cairo span {
+  width: clamp(26px, 3.8vw, 58px);
+  height: auto;
+  aspect-ratio: 1;
+  border: 1px solid color-mix(in srgb, var(--season-accent) 54%, transparent);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 35% 32%,
+    color-mix(in srgb, var(--season-accent) 26%, transparent),
+    transparent 68%
+  );
+  box-shadow: 0 0 28px color-mix(in srgb, var(--season-accent) 15%, transparent);
+}
+
+.foreground-depth--paris span {
+  height: clamp(25px, 4.6vw, 68px);
+  border-radius: 82% 18% 78% 22% / 64% 28% 72% 36%;
+  background: color-mix(in srgb, var(--season-accent) 54%, transparent);
+}
+
+.foreground-depth--new-york span {
+  width: clamp(9px, 1.2vw, 19px);
+  height: auto;
+  aspect-ratio: 1;
+  border: 1px solid rgb(242 246 255 / 45%);
+  border-radius: 2px;
+  background: rgb(238 244 255 / 26%);
+  filter: blur(0.8px);
+}
+
+.foreground-depth--ushuaia span {
+  width: clamp(22px, 3.8vw, 58px);
+  height: auto;
+  aspect-ratio: 0.72;
+  border: 1px solid rgb(185 228 255 / 28%);
+  border-radius: 3px 50% 3px 50%;
+  background: linear-gradient(
+    145deg,
+    rgb(204 238 255 / 30%),
+    color-mix(in srgb, var(--season-accent) 16%, transparent)
+  );
+}
+
+.globe-stage {
+  position: absolute;
+  z-index: 3;
+  top: 47%;
+  left: 50%;
+  width: min(48vw, 68vh, 680px);
+  min-width: 380px;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  overflow: visible;
+}
+
+.globe {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  overflow: visible;
+  opacity: 0;
+  filter: saturate(0.48) contrast(1.12);
+  transition: opacity 700ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.globe::before {
+  position: absolute;
+  z-index: 0;
+  inset: 9.2%;
+  border: 1px solid
+    color-mix(in srgb, var(--season-accent) 24%, rgb(178 211 255 / 35%));
+  border-radius: 50%;
+  box-shadow:
+    -12px -4px 34px color-mix(in srgb, var(--season-accent) 14%, transparent),
+    13px 5px 31px rgb(115 163 224 / 13%);
+  content: "";
+  filter: blur(1.8px);
+  opacity: 0.66;
+  pointer-events: none;
+}
+
+.globe--ready {
+  opacity: 1;
+}
+
+.globe__shadow {
+  position: absolute;
+  z-index: 0;
+  right: 7%;
+  bottom: 4%;
+  left: 7%;
+  height: 20%;
+  border-radius: 50%;
+  background: rgb(0 0 0 / 74%);
+  filter: blur(28px);
+  opacity: 0.9;
+  transform: translateY(10%);
+}
+
+.globe__canvas {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+  contain: layout;
+  cursor: grab;
+  touch-action: none;
+}
+
+.globe__canvas:active {
+  cursor: grabbing;
+}
+
+.globe--fallback {
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 31% 29%, rgb(208 211 217 / 24%), transparent 28%),
+    radial-gradient(circle at 62% 58%, rgb(95 104 119 / 30%), transparent 32%),
+    radial-gradient(circle at 42% 40%, #292b31, #10131a 69%);
+  box-shadow:
+    inset -24px -18px 42px rgb(0 0 0 / 55%),
+    0 0 48px color-mix(in srgb, var(--season-glow) 16%, transparent);
+}
+
+.globe__marker {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 7;
+  display: block;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  opacity: 0;
+  pointer-events: none;
+  cursor: pointer;
+  transition: opacity 200ms ease;
+  will-change: transform, opacity;
+}
+
+.globe__marker-halo {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 20px;
+  height: 20px;
+  border: 1px solid color-mix(in srgb, var(--season-accent) 72%, transparent);
+  border-radius: 50%;
+  animation: marker-breathe 2.9s ease-in-out infinite;
+}
+
+.globe__marker--active .globe__marker-halo {
+  top: -2px;
+  left: -2px;
+  width: 32px;
+  height: 32px;
+  border-color: color-mix(in srgb, var(--season-accent) 88%, #fff);
+  box-shadow:
+    0 0 12px color-mix(in srgb, var(--season-accent) 82%, transparent),
+    0 0 32px color-mix(in srgb, var(--season-accent) 46%, transparent);
+}
+
+.globe__marker-dot {
+  position: absolute;
+  top: 11px;
+  left: 11px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #fff6ef;
+  box-shadow: 0 0 14px 3px var(--season-accent);
+}
+
+.globe__marker--active .globe__marker-dot {
+  background: #fff;
+  box-shadow:
+    0 0 8px 3px #fff,
+    0 0 22px 9px color-mix(in srgb, var(--season-accent) 72%, transparent);
+}
+
+.globe__marker-label {
+  position: absolute;
+  top: -15px;
+  left: 25px;
+  color: rgb(255 255 255 / 93%);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-shadow: 0 2px 12px rgb(0 0 0 / 90%);
+  white-space: nowrap;
+}
+
+.globe__marker:not(.globe__marker--active) .globe__marker-halo {
+  top: 7px;
+  left: 7px;
+  width: 14px;
+  height: 14px;
+  opacity: 0.62;
+  animation: none;
+}
+
+.globe__marker:not(.globe__marker--active) .globe__marker-dot {
+  top: 12px;
+  left: 12px;
+  width: 4px;
+  height: 4px;
+  box-shadow: 0 0 8px 2px var(--season-accent);
+}
+
+.globe__marker[data-hemisphere="back"] .globe__marker-halo {
+  border-style: dashed;
+  border-color: rgb(226 235 249 / 42%);
+}
+
+.globe__marker[data-hemisphere="back"] .globe__marker-dot {
+  background: transparent;
+  box-shadow: inset 0 0 0 1px rgb(235 242 255 / 72%);
+}
+
+.globe__marker:not(.globe__marker--active) .globe__marker-label {
+  opacity: 0;
+  transition: opacity 160ms ease;
+}
+
+.globe__marker:hover .globe__marker-label,
+.globe__marker:focus-visible .globe__marker-label {
+  opacity: 1;
+}
+
+.journey-progress {
+  position: absolute;
+  z-index: 11;
+  bottom: clamp(8px, 1.4vh, 16px);
+  left: 50%;
+  width: min(78vw, 1040px);
+  height: clamp(88px, 13vh, 126px);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.journey-progress__orbit {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.journey-progress__horizon {
+  fill: none;
+  stroke: rgb(255 248 236 / 11%);
+  stroke-dasharray: 1 10;
+  stroke-linecap: round;
+  stroke-width: 0.75;
+  vector-effect: non-scaling-stroke;
+}
+
+.journey-progress__arc {
+  fill: none;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.journey-progress__arc--track {
+  stroke: rgb(255 248 236 / 48%);
+  stroke-width: 0.9;
+}
+
+.journey-progress__day-cue {
+  fill: none;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.journey-progress__phase-glow {
+  stroke: none;
+  filter: blur(6px);
+  opacity: 0.2;
+}
+
+.journey-progress__phase--rise .journey-progress__phase-glow {
+  fill: #df799b;
+}
+
+.journey-progress__phase--noon .journey-progress__phase-glow {
+  fill: #ffe2a0;
+  opacity: 0.17;
+}
+
+.journey-progress__phase--set .journey-progress__phase-glow {
+  fill: #887abf;
+}
+
+.journey-progress__phase-disc {
+  stroke: rgb(255 248 229 / 52%);
+  stroke-width: 0.65;
+  vector-effect: non-scaling-stroke;
+}
+
+.journey-progress__phase--rise .journey-progress__phase-disc {
+  fill: url("#solar-dawn-disc");
+  filter: drop-shadow(0 0 6px rgb(229 118 146 / 62%));
+}
+
+.journey-progress__phase--noon .journey-progress__phase-disc {
+  fill: url("#solar-noon-disc");
+  filter: drop-shadow(0 0 7px rgb(255 223 152 / 68%));
+}
+
+.journey-progress__phase--set .journey-progress__phase-disc {
+  fill: url("#solar-dusk-disc");
+  filter: drop-shadow(0 0 6px rgb(139 112 181 / 64%));
+}
+
+.journey-progress__phase-rays {
+  fill: none;
+  stroke: rgb(255 243 215 / 48%);
+  stroke-width: 0.85;
+  vector-effect: non-scaling-stroke;
+}
+
+.journey-progress__phase--rise .journey-progress__phase-rays {
+  stroke: rgb(249 190 167 / 54%);
+}
+
+.journey-progress__phase--set .journey-progress__phase-rays {
+  stroke: rgb(190 182 231 / 48%);
+}
+
+.journey-progress__active-flare {
+  fill: url("#solar-flare");
+  mix-blend-mode: screen;
+}
+
+.journey-progress__active-sun {
+  fill: color-mix(in srgb, var(--season-accent) 72%, #fff);
+  filter:
+    drop-shadow(0 0 5px var(--season-accent))
+    drop-shadow(0 0 13px var(--season-accent));
+}
+
+.journey-progress__active-ring {
+  fill: none;
+  stroke: color-mix(in srgb, var(--season-accent) 54%, #fff);
+  stroke-width: 0.75;
+  opacity: 0.62;
+  vector-effect: non-scaling-stroke;
+}
+
+.journey-progress__cities {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  pointer-events: none;
+}
+
+.journey-progress__cities li {
+  position: absolute;
+  top: var(--city-y);
+  left: var(--city-x);
+  width: 1px;
+  height: 1px;
+}
+
+.journey-progress__city-stop {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 92px;
+  height: 58px;
+  transform: translate(-50%, -50%);
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: rgb(248 245 241 / 46%);
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.journey-progress__city-dot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgb(255 255 255 / 52%);
+  border-radius: 50%;
+  background: rgb(7 9 14 / 92%);
+  box-shadow: 0 0 0 4px rgb(255 255 255 / 2%);
+  transition:
+    transform 220ms ease,
+    border-color 220ms ease,
+    background 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.journey-progress__season,
+.journey-progress__city-name {
+  position: absolute;
+  left: 50%;
+  width: 92px;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  transition:
+    color 200ms ease,
+    opacity 200ms ease,
+    transform 200ms ease;
+}
+
+.journey-progress__season {
+  bottom: calc(50% + 11px);
+  color: color-mix(in srgb, var(--season-accent) 64%, #fff);
+  font-size: 7.5px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  opacity: 0;
+  text-transform: uppercase;
+}
+
+.journey-progress__city-name {
+  top: calc(50% + 11px);
+  color: rgb(248 245 241 / 72%);
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 12px;
+  letter-spacing: 0.015em;
+  opacity: 1;
+}
+
+.journey-progress__city-stop:hover .journey-progress__city-dot,
+.journey-progress__city-stop:focus-visible .journey-progress__city-dot {
+  transform: translate(-50%, -50%) scale(1.35);
+  border-color: color-mix(in srgb, var(--season-accent) 72%, #fff);
+  box-shadow: 0 0 12px var(--season-accent);
+}
+
+.journey-progress__city-stop:hover .journey-progress__season,
+.journey-progress__city-stop:focus-visible .journey-progress__season {
+  transform: translateX(-50%) translateY(-2px);
+  opacity: 1;
+}
+
+.journey-progress__city-stop:focus-visible {
+  outline: none;
+}
+
+.journey-progress__city-stop--active .journey-progress__city-dot {
+  transform: translate(-50%, -50%) scale(1.28);
+  border-color: #fff;
+  background: color-mix(in srgb, var(--season-accent) 78%, #fff);
+  box-shadow:
+    0 0 8px 2px color-mix(in srgb, var(--season-accent) 72%, transparent),
+    0 0 19px color-mix(in srgb, var(--season-accent) 48%, transparent);
+}
+
+.journey-progress__city-stop--active .journey-progress__city-name {
+  color: color-mix(in srgb, var(--season-accent) 56%, #fff);
+  opacity: 1;
+}
+
+.chapter {
+  position: absolute;
+  z-index: 10;
+  bottom: clamp(112px, 14vh, 154px);
+  left: var(--page-gutter);
+  width: min(34vw, 470px);
+  pointer-events: none;
+}
+
+.chapter__city {
+  margin: 0;
+  color: #f7f1ed;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(58px, 6vw, 92px);
+  font-weight: 400;
+  line-height: 0.87;
+  letter-spacing: -0.055em;
+  text-shadow:
+    0 2px 2px rgb(0 0 0 / 86%),
+    0 3px 28px rgb(0 0 0 / 72%);
+}
+
+.chapter__copy {
+  max-width: 410px;
+  margin: 13px 0 0 3px;
+  color: rgb(250 247 244 / 64%);
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(16px, 1.45vw, 21px);
+  font-style: italic;
+  line-height: 1.45;
+  text-shadow:
+    0 1px 2px rgb(0 0 0 / 95%),
+    0 0 16px rgb(0 0 0 / 88%);
+}
+
+.scroll-cue {
+  position: absolute;
+  z-index: 9;
+  bottom: clamp(26px, 4vh, 44px);
+  left: var(--page-gutter);
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: rgb(250 247 244 / 56%);
+  font-size: 8px;
+  font-weight: 500;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.scroll-cue svg {
+  width: 11px;
+  height: 18px;
+  color: var(--season-accent);
+  animation: cue-float 2.4s ease-in-out infinite;
+}
+
+.journey__travel-progress {
+  position: absolute;
+  z-index: 12;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 1px;
+  transform-origin: left center;
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--season-accent) 52%, transparent),
+    var(--season-accent)
+  );
+  box-shadow: 0 0 8px color-mix(in srgb, var(--season-accent) 46%, transparent);
+}
+
+@keyframes marker-breathe {
+  0%,
+  100% {
+    transform: scale(0.86);
+    opacity: 0.55;
+  }
+
+  50% {
+    transform: scale(1.28);
+    opacity: 0.95;
+  }
+}
+
+@keyframes cue-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(4px);
+  }
+}
+
+@keyframes foreground-drift {
+  0% {
+    translate: -8px -10px;
+    rotate: -4deg;
+  }
+
+  100% {
+    translate: 11px 14px;
+    rotate: 7deg;
+  }
+}
+
+@keyframes season-fall {
+  0% {
+    transform: translate3d(-2vw, -12vh, 0) rotate(0deg);
+    opacity: 0;
+  }
+
+  12% {
+    opacity: 0.48;
+  }
+
+  52% {
+    transform: translate3d(4vw, 52vh, 0) rotate(210deg);
+  }
+
+  100% {
+    transform: translate3d(-3vw, 116vh, 0) rotate(430deg);
+    opacity: 0;
+  }
+}
+
+@keyframes season-rise {
+  0% {
+    transform: translate3d(-1vw, 112vh, 0) scale(0.7);
+    opacity: 0;
+  }
+
+  16% {
+    opacity: 0.38;
+  }
+
+  58% {
+    transform: translate3d(3vw, 45vh, 0) scale(1);
+  }
+
+  100% {
+    transform: translate3d(-2vw, -16vh, 0) scale(1.2);
+    opacity: 0;
+  }
+}
+
+@media (max-width: 1020px) {
+  .journey-progress {
+    width: min(88vw, 860px);
+  }
+
+  .globe-stage {
+    width: min(58vw, 64vh, 580px);
+    min-width: 340px;
+  }
+
+  .chapter {
+    width: min(32vw, 320px);
+  }
+}
+
+@media (max-width: 720px) {
+  :root {
+    --page-gutter: 20px;
+  }
+
+  .journey {
+    height: 2600svh;
+    min-height: 12000px;
+  }
+
+  .journey__sticky {
+    min-height: 530px;
+  }
+
+  .journey-progress {
+    bottom: 13px;
+    width: calc(100vw - 42px);
+    height: 82px;
+    transform: translateX(-50%);
+  }
+
+  .journey-progress__active-flare {
+    opacity: 0.82;
+  }
+
+  .journey-progress__city-stop {
+    width: 62px;
+    height: 48px;
+  }
+
+  .journey-progress__season {
+    width: 68px;
+    font-size: 5.5px;
+    letter-spacing: 0.06em;
+    opacity: 0;
+  }
+
+  .journey-progress__city-stop--active .journey-progress__season {
+    opacity: 0.82;
+  }
+
+  .journey-progress__city-name {
+    display: block;
+    width: 64px;
+    font-size: 8px;
+  }
+
+  .globe-stage {
+    top: 45.5%;
+    width: min(84vw, 54vh, 430px);
+    min-width: 270px;
+  }
+
+  .chapter {
+    right: 27%;
+    bottom: 126px;
+    width: auto;
+  }
+
+  .chapter__city {
+    font-size: clamp(53px, 16vw, 78px);
+  }
+
+  .chapter__copy {
+    max-width: 250px;
+    margin-top: 9px;
+    font-size: 15px;
+  }
+
+  .scroll-cue {
+    bottom: 24px;
+    font-size: 0;
+  }
+
+  .scroll-cue svg {
+    width: 12px;
+    height: 20px;
+  }
+
+  .season-field span:nth-child(n + 19) {
+    display: none;
+  }
+
+  .season-field--ushuaia span:nth-child(n) {
+    display: block;
+  }
+}
+
+@media (max-width: 420px) {
+  .journey-progress {
+    width: calc(100vw - 28px);
+    height: 76px;
+  }
+
+  .globe-stage {
+    top: 45%;
+    width: min(88vw, 48vh, 370px);
+  }
+
+  .chapter {
+    right: 20px;
+    bottom: 125px;
+  }
+
+  .chapter__city {
+    font-size: clamp(50px, 15.6vw, 66px);
+  }
+
+  .chapter__copy {
+    font-size: 14px;
+  }
+
+}
+
+@media (max-height: 680px) and (min-width: 721px) {
+  .journey-progress {
+    bottom: 6px;
+    height: 82px;
+  }
+
+  .globe-stage {
+    width: min(42vw, 64vh, 470px);
+    min-width: 320px;
+  }
+
+  .chapter {
+    bottom: 86px;
+  }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

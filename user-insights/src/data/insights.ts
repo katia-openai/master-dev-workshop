@@ -430,6 +430,49 @@ export function getCountryTotals(selectedCities: UserCity[]) {
     .sort((a, b) => b.users - a.users);
 }
 
+export type CountryMomentum = ReturnType<typeof getCountryTotals>[number] & {
+  momentum: number;
+  trend: { date: string; change: number }[];
+};
+
+export function getCountryMomentum(
+  period: Period,
+  selectedCities: UserCity[],
+): CountryMomentum[] {
+  const countries = getCountryTotals(selectedCities);
+  const averageGrowth =
+    countries.reduce((sum, country) => sum + country.growth, 0) /
+    Math.max(countries.length, 1);
+  const averageActivityRate =
+    countries.reduce((sum, country) => sum + country.active / country.users, 0) /
+    Math.max(countries.length, 1);
+  const periodWeight = period === "7d" ? 0.72 : period === "90d" ? 1.18 : 1;
+
+  return countries
+    .map((country) => {
+      const countryCities = selectedCities.filter(
+        (city) => city.country === country.country,
+      );
+      const trend = getGrowthData(period, countryCities).map((point) => ({
+        date: point.date,
+        change: Math.round(
+          ((point.users - point.previous) / point.previous) * 1000,
+        ),
+      }));
+      const activityRate = country.active / country.users;
+
+      return {
+        ...country,
+        momentum:
+          ((country.growth - averageGrowth) * 0.68 +
+            (activityRate - averageActivityRate) * 650) *
+          periodWeight,
+        trend,
+      };
+    })
+    .sort((left, right) => right.momentum - left.momentum);
+}
+
 export function getGrowthData(period: Period, selectedCities: UserCity[]) {
   const count = period === "7d" ? 7 : period === "28d" ? 28 : 30;
   const total = selectedCities.reduce((sum, city) => sum + city.users, 0);

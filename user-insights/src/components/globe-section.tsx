@@ -8,10 +8,12 @@ export function GlobeSection({
   cities,
   region,
   onRegionChange,
+  selectedCountry,
 }: {
   cities: UserCity[];
   region: Region;
   onRegionChange: (region: Region) => void;
+  selectedCountry?: string;
 }) {
   const total = cities.reduce((sum, city) => sum + city.users, 0);
   const active = cities.reduce((sum, city) => sum + city.active, 0);
@@ -47,7 +49,7 @@ export function GlobeSection({
           ))}
         </div>
       </div>
-      <WorldGlobe cities={cities} />
+      <WorldGlobe cities={cities} selectedCountry={selectedCountry} />
       <div className="globe-summary">
         <div className="worldwide-total">
           <span className="hero-number">{compactNumber(total, 2)}</span>

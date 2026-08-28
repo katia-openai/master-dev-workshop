@@ -1,10 +1,10 @@
-# Master.dev workshop participant starter repo
+# Master.dev Course Starter Repo
 
-Open this folder as your project in Codex during the workshop.
+This is a companion repo for the **free** [Agentic Frontend Development with Codex course](https://master.dev/courses/codex/) from [Master.dev](https://master.dev/). 
 
 ## Example prompts
 
-You can find the example prompts we’ll use throughout the workshop in the [`prompts`](prompts) folder. They cover starting a frontend from an idea, iterating with goals, debugging in the browser, working in an existing project, and creating a reusable skill. We’ll go through them together during the workshop.
+You can find the example prompts we’ll use throughout the course in the [`prompts`](prompts) folder. They cover starting a frontend from an idea, iterating with goals, debugging in the browser, working in an existing project, and creating a reusable skill. We’ll go through them together during the course. You'll find more resources and links to the examples on [the course website](https://katia-agentic-frontend-workshop.openai.chatgpt.site/).
 
 ## Example app
 

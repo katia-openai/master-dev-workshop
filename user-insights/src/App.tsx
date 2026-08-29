@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { AudienceChart } from "@/components/audience-chart";
+import { AudienceMomentum } from "@/components/audience-momentum";
 import { GeographicTable } from "@/components/geographic-table";
 import { GlobeSection } from "@/components/globe-section";
 import { InsightsRail } from "@/components/insights-rail";
@@ -9,7 +10,13 @@ import { cities, getCities, type Period, type Region } from "@/data/insights";
 export default function App() {
   const [region, setRegion] = useState<Region>("Everywhere");
   const [period, setPeriod] = useState<Period>("28d");
+  const [selectedCountry, setSelectedCountry] = useState<string>();
   const selectedCities = useMemo(() => getCities(region), [region]);
+  const visibleSelectedCountry = selectedCities.some(
+    (city) => city.country === selectedCountry,
+  )
+    ? selectedCountry
+    : undefined;
 
   return (
     <div className="app-shell" id="overview">
@@ -31,8 +38,15 @@ export default function App() {
               cities={selectedCities}
               region={region}
               onRegionChange={setRegion}
+              selectedCountry={visibleSelectedCountry}
             />
             <div className="analytics-grid">
+              <AudienceMomentum
+                cities={selectedCities}
+                period={period}
+                selectedCountry={visibleSelectedCountry}
+                onCountrySelect={setSelectedCountry}
+              />
               <AudienceChart
                 cities={selectedCities}
                 period={period}

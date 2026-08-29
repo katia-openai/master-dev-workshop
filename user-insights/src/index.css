@@ -667,6 +667,45 @@ button {
   min-width: 0;
   background: rgb(16 17 28 / 66%);
 }
+.momentum-card {
+  grid-column: 1 / -1;
+}
+.momentum-content {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+  gap: 22px;
+  padding: 13px 16px 16px;
+}
+.momentum-feature {
+  display: grid;
+  grid-template-columns: minmax(150px, 0.8fr) minmax(160px, 1.2fr);
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+  padding: 13px;
+  border: 1px solid #29283a;
+  border-radius: 9px;
+  background: linear-gradient(118deg, rgb(134 231 193 / 8%), transparent 70%);
+}
+.momentum-feature-copy { display: flex; min-width: 0; flex-direction: column; align-items: flex-start; }
+.momentum-kicker, .momentum-list-title { color: #9290a5; font-size: 10px; }
+.momentum-country-button, .momentum-row { border: 0; background: transparent; cursor: pointer; }
+.momentum-country-button { display: inline-flex; align-items: center; gap: 6px; margin: 5px -5px 1px; padding: 4px 5px; border-radius: 5px; color: #e9e7f5; font-size: 14px; font-weight: 600; text-align: left; }
+.momentum-country-button:hover, .momentum-country-selected { background: #222130; }
+.momentum-country-button svg { width: 13px; height: 13px; color: var(--mint); }
+.momentum-value { color: var(--mint); font-family: var(--font-display); font-size: 23px; font-weight: 600; letter-spacing: -0.06em; }
+.momentum-note { margin-top: 1px; color: #858396; font-size: 10px; }
+.momentum-trend { height: 94px; min-width: 0; }
+.momentum-lists { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.momentum-list { display: flex; min-width: 0; flex-direction: column; gap: 5px; }
+.momentum-list-title { margin-bottom: 2px; }
+.momentum-row { display: flex; min-width: 0; align-items: center; justify-content: space-between; gap: 8px; padding: 6px 5px; border-radius: 5px; color: #d7d5e5; font-size: 10.5px; text-align: left; }
+.momentum-row:hover, .momentum-row-selected { background: #1d1c29; }
+.momentum-row-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.momentum-row-name > span { margin-right: 6px; font-size: 13px; }
+.momentum-row-value { display: inline-flex; flex: 0 0 auto; align-items: center; gap: 2px; color: var(--mint); font-size: 10px; font-variant-numeric: tabular-nums; }
+.momentum-row-value svg { width: 12px; height: 12px; }
+.momentum-row-value-negative { color: #e9aa85; }
 .analytics-header {
   min-height: 64px;
   flex-direction: row;
@@ -849,6 +888,7 @@ button {
   .analytics-grid {
     grid-template-columns: 1fr;
   }
+  .momentum-content { grid-template-columns: 1fr; }
 }
 @media (max-width: 720px) {
   .dashboard,
@@ -957,6 +997,10 @@ button {
   .analytics-header {
     flex-wrap: wrap;
   }
+  .momentum-content { gap: 13px; padding: 11px; }
+  .momentum-feature { grid-template-columns: 1fr; gap: 8px; }
+  .momentum-trend { height: 72px; }
+  .momentum-lists { gap: 8px; }
   .period-tabs button {
     padding-right: 7px;
     padding-left: 7px;

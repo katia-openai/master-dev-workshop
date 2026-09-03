@@ -5,6 +5,7 @@ import { GlobeSection } from "@/components/globe-section";
 import { InsightsRail } from "@/components/insights-rail";
 import { TopNav } from "@/components/top-nav";
 import { cities, getCities, type Period, type Region } from "@/data/insights";
+import { ActiveEngagementCard } from "@/components/active-engagement-card";
 
 export default function App() {
   const [region, setRegion] = useState<Region>("Everywhere");
@@ -38,6 +39,7 @@ export default function App() {
                 period={period}
                 onPeriodChange={setPeriod}
               />
+              <ActiveEngagementCard cities={selectedCities} />
               <GeographicTable cities={selectedCities} />
             </div>
           </div>
